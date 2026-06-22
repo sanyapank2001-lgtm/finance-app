@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#eef2f6" />
+  <meta name="description" content="Контур — мобильный трекер личных финансов" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Контур" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Контур — личные финансы</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="side-nav" aria-label="Навигация">
+      <div class="brand"><span class="brand-mark">К</span><span>КОНТУР</span></div>
+      <div id="desktopNav"></div>
+    </aside>
+    <main>
+      <header class="topbar">
+        <button class="icon-button menu-button" aria-label="Меню">☰</button>
+        <div class="period"><strong>ИЮНЬ 2026</strong><span>ПЛАН ПОД КОНТРОЛЕМ</span></div>
+        <div class="top-actions"><button class="icon-button" aria-label="Уведомления">♢<i></i></button><button class="icon-button" aria-label="Фильтры">⌁</button></div>
+      </header>
+      <div id="screen" class="screen"></div>
+    </main>
+    <nav id="mobileNav" class="bottom-nav" aria-label="Навигация"></nav>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+    }
+  </script>
+</body>
+</html>
