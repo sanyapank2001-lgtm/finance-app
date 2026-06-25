@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
-  <link rel="stylesheet" href="styles.css?v=3.7.0" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -25,17 +25,14 @@
       <header class="topbar">
         <button class="icon-button menu-button" aria-label="Меню">☰</button>
         <div class="period"><strong>ИЮНЬ 2026</strong><span>ПЛАН ПОД КОНТРОЛЕМ</span></div>
-        <div id="localSaveStatus" class="cloud-sync-status saved" aria-live="polite">локально сохранено</div>
-        <div class="top-actions"><button id="notificationsButton" class="icon-button" aria-label="Уведомления">♢<i></i></button><button id="globalSearchButton" class="icon-button" aria-label="Глобальный поиск">⌕</button></div>
+        <div class="top-actions"><button class="icon-button" aria-label="Уведомления">♢<i></i></button><button class="icon-button" aria-label="Фильтры">⌁</button></div>
       </header>
       <div id="screen" class="screen"></div>
     </main>
     <nav id="mobileNav" class="bottom-nav" aria-label="Навигация"></nav>
   </div>
   <div id="toast" class="toast" role="status"></div>
-  <div id="modalRoot"></div>
-  <script src="excel-data.js?v=3.7.0"></script>
-  <script src="app.js?v=3.7.0"></script>
+  <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
