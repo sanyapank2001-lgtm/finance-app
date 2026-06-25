@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kontur-shell-v2';
+const CACHE_NAME = 'kontur-shell-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -11,6 +11,7 @@ const APP_SHELL = [
   './icons/icon-512.png',
   './icons/icon-maskable-512.png'
 ];
+const APP_SHELL_URLS = new Set(APP_SHELL.map(path => new URL(path, self.location).href));
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -23,7 +24,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+      .then(keys => Promise.all(keys.filter(key => key.startsWith('kontur-shell-') && key !== CACHE_NAME).map(key => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -49,6 +50,7 @@ self.addEventListener('fetch', event => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
         if (!response || response.status !== 200 || response.type === 'opaque') return response;
+        if (!APP_SHELL_URLS.has(event.request.url)) return response;
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
         return response;
